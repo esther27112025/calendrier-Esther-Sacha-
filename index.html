@@ -117,8 +117,8 @@ const YEAR = 2026;
 // Pour tester avant décembre : ajoute ?preview=1 à l'adresse du site.
 // Cette option ne fonctionne que si quelqu'un ajoute volontairement ce paramètre au lien.
 const PREVIEW_MODE = new URLSearchParams(location.search).get("preview") === "1";
-const ESCALADE_DAY = 12; // Change le nombre (1 à 24) pour déplacer l'invitation.
-const ESCALADE_TEXT = "J'ai une petite aventure à te proposer… Prépare-toi à partager un date à l'escalade avec moi ! 🧗💛";
+const ESCALADE_DAY = 24; // Invitation à l'escalade dans la case du 24 décembre.
+const ESCALADE_TEXT = "Coucouuuu Sacha,\nDéjà joyeux Noël !! Profite bien 😘\nPour fêter ça, je t’offre une séance d’escalade avec moi à l’UCPA de Bordeaux ! Faudra qu’on se cale une date plus tard… En tout cas, j’espère que ça te fera plaisir !\nGros bisous et encore joyeux Noël 🎁\nÀ bientôt, je t’aime ❤️\nTeterouille";
 const SURPRISES = [
  {title:"Un petit mot pour commencer",text:"Coucou Sachouille 💛\nBienvenue dans ton calendrier. J'ai préparé des petites choses pour rendre ton mois de décembre un peu plus magique."},
  {title:"Une raison parmi mille",text:"J'aime les petits détails qui font que tu es toi. À toi de compléter ici avec une raison très personnelle : [ajoute ta raison préférée]."},
@@ -131,8 +131,8 @@ const SURPRISES = [
  {title:"Le quiz de nous",text:"Question : quel est un de mes souvenirs préférés avec toi ?\nRéponse à personnaliser : [écris une réponse ou ajoute trois choix]."},
  {title:"Quand tu as besoin de sourire",text:"Petit rappel : tu comptes pour moi. J'espère que cette surprise te donnera un mini sourire, même dans une journée compliquée."},
  {title:"Trois choses que j'adore",text:"1. [un détail que tu aimes]\n2. [une qualité qui te touche]\n3. [un souvenir qui te fait sourire]"},
- {title:"Notre date à l'escalade 🧗",text:ESCALADE_TEXT,qr:true},
  {title:"Le message secret",text:"Tu peux cacher ici un petit message secret, une private joke ou un mot que vous seuls comprenez."},
+ {title:"Notre date à l'escalade 🧗",text:ESCALADE_TEXT,link:"https://www.ucpa.com/sport-station/bordeaux/escalade",linkLabel:"Découvrir l’escalade en bloc à l’UCPA Bordeaux"},
  {title:"Souvenir en images",text:"Ajoute une autre photo de vous deux en remplaçant PHOTO_A_REMPLACER_2.jpg par le nom du fichier.",image:"PHOTO_A_REMPLACER_2.jpg"},
  {title:"Bon pour un moment ensemble",text:"Bon pour un moment choisi ensemble : balade, jeu, goûter ou autre idée qui vous fait plaisir."},
  {title:"Petite question",text:"Si on pouvait revivre une journée ensemble, laquelle choisirais-tu ? J'ai hâte d'entendre ta réponse."},
@@ -143,7 +143,7 @@ const SURPRISES = [
  {title:"Une vidéo souvenir",text:"Tu peux ajouter une vidéo ici en remplaçant VIDEO_A_REMPLACER.mp4 par le nom de ton fichier.",video:"VIDEO_A_REMPLACER.mp4"},
  {title:"Un compliment sincère",text:"Un petit compliment rien que pour toi : [écris quelque chose de vrai et de précis que tu apprécies chez lui]."},
  {title:"Presque Noël ✨",text:"On approche du 24 ! Merci pour les moments qu'on a déjà partagés. À compléter avec ton petit mot du jour."},
- {title:"À personnaliser pour Noël",text:"Cette case est laissée exprès pour ta grande surprise du 24 décembre. Tu pourras choisir le texte, les photos et les effets plus tard."}
+ {title:"Notre date à l'escalade 🧗",text:ESCALADE_TEXT,link:"https://www.ucpa.com/sport-station/bordeaux/escalade",linkLabel:"Découvrir l’escalade en bloc à l’UCPA Bordeaux"}
 ];
 
 const $ = id => document.getElementById(id);
@@ -187,6 +187,7 @@ function showSurprise(n){
   $("surpriseTitle").textContent=item.title;
   const body=$("surpriseBody");body.innerHTML="";
   const p=document.createElement("p");p.textContent=item.text;body.appendChild(p);
+  if(item.link){const link=document.createElement("a");link.href=item.link;link.target="_blank";link.rel="noopener noreferrer";link.className="gold-btn";link.style.cssText="display:inline-block;text-decoration:none;text-align:center;margin:12px 0";link.textContent=item.linkLabel||"Ouvrir le lien";body.appendChild(link);}
   if(item.image && !item.image.startsWith("PHOTO_A_REMPLACER")){
     const img=document.createElement("img");img.className="photo";img.src=item.image;img.alt="Souvenir en photo";img.onerror=()=>img.remove();body.appendChild(img);
   }
