@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08152f">
+<title>Pour Sachouille ✦ par Teterouille</title>
+<style>
+:root{--navy:#08152f;--navy2:#102449;--gold:#e8c879;--gold2:#fff0bd;--cream:#fff9eb;--muted:#b8c2d8;--line:rgba(232,200,121,.28)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at top,#19345f 0%,var(--navy) 52%,#050b1b 100%);color:var(--cream);font-family:Georgia,"Times New Roman",serif;min-height:100vh;overflow-x:hidden}
+button{font:inherit}
+button:focus-visible{outline:3px solid var(--gold2);outline-offset:4px}
+#sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;background:var(--gold2);border-radius:50%;opacity:.7;animation:twinkle 3s infinite ease-in-out}
+.snow{position:absolute;top:-15px;color:#fff8e7;opacity:.75;animation:fall linear infinite}
+.heart{position:absolute;bottom:-30px;color:#e9b9c8;animation:rise linear forwards;opacity:.7}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.25)}}
+@keyframes fall{to{transform:translateY(110vh) rotate(240deg)}}
+@keyframes rise{to{transform:translateY(-110vh) translateX(25px);opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+main{position:relative;z-index:1;width:min(100% - 28px,980px);margin:0 auto;padding:24px 0 54px}
+header{text-align:center;padding:22px 0 12px}
+.eyebrow{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font:11px/1.5 Arial,sans-serif}
+h1{font-size:clamp(34px,8vw,66px);font-weight:normal;line-height:1.04;margin:14px 0;color:var(--gold2);text-shadow:0 0 28px #d9b96824}
+h2{font-size:clamp(25px,5vw,38px);font-weight:normal;color:var(--gold2);margin:0 0 12px}
+p{line-height:1.7}
+.intro,.calendar-wrap,.surprise{border:1px solid var(--line);background:linear-gradient(145deg,#102449e8,#08152feF);box-shadow:0 20px 60px #0003;border-radius:24px}
+.intro{text-align:center;padding:clamp(24px,6vw,54px) 20px;margin:18px auto 24px;max-width:740px;animation:fadeUp .8s both}
+.moon{font-size:34px;color:var(--gold);margin-bottom:10px}
+.intro p{max-width:530px;margin:12px auto;color:#e0e5f0}
+.gold-btn{border:1px solid var(--gold);background:linear-gradient(135deg,#f4dc9a,#c59a43);color:#101a30;padding:13px 22px;border-radius:999px;font-weight:bold;cursor:pointer;box-shadow:0 7px 25px #d4ad5140;transition:transform .2s,filter .2s}
+.gold-btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.small-note{font:12px/1.6 Arial,sans-serif;color:var(--muted)}
+.hidden{display:none!important}
+.calendar-wrap{padding:clamp(18px,4vw,32px);margin:20px auto;animation:fadeUp .5s both}
+.calendar-head{text-align:center;margin-bottom:22px}
+.calendar-head p{color:var(--muted);margin:5px 0}
+.progress{height:5px;background:#ffffff13;border-radius:9px;overflow:hidden;margin:18px auto 0;max-width:400px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#b58b38,var(--gold2));transition:width .4s}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.door{min-height:104px;position:relative;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#162e55,#0b1a36);color:var(--gold2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s;padding:8px}
+.door:hover:not(:disabled){transform:translateY(-3px);border-color:var(--gold);background:linear-gradient(145deg,#203c68,#102449)}
+.door .num{font-size:clamp(24px,5vw,34px)}
+.door .label{font:10px/1.3 Arial,sans-serif;letter-spacing:.05em;color:#d6c58e;text-align:center}
+.door:disabled{opacity:.42;cursor:not-allowed;filter:saturate(.6)}
+.door.opened{border-color:#e8c8799c;background:linear-gradient(145deg,#213a60,#142343)}
+.door.opened:after{content:"✦";position:absolute;top:7px;right:9px;color:var(--gold);font-size:12px}
+.surprise{padding:clamp(22px,5vw,42px);margin:20px auto;max-width:740px;animation:fadeUp .35s both}
+.surprise .day-label{color:var(--gold);font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.surprise h2{margin-top:10px}
+.surprise p{white-space:pre-line}
+.photo{display:block;width:100%;max-height:380px;object-fit:cover;border-radius:14px;border:1px solid var(--line);margin:18px 0}
+.media{width:100%;margin:16px 0;border-radius:12px}
+.back-btn{margin-top:18px;background:transparent;color:var(--gold2);border:1px solid var(--line);padding:10px 16px;border-radius:999px;cursor:pointer}
+.qrbox{display:grid;place-items:center;background:#fff;padding:14px;border-radius:12px;width:max-content;max-width:100%;margin:18px auto}
+#qrcode img,#qrcode canvas{max-width:100%;height:auto!important}
+footer{text-align:center;color:var(--muted);font:12px/1.7 Arial,sans-serif;padding:22px 8px}
+footer span{color:var(--gold)}
+@media(min-width:620px){.grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.door{min-height:120px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+<main>
+  <header>
+    <div class="eyebrow">Une petite magie de décembre</div>
+    <h1>Pour Sachouille <span style="color:var(--gold)">✦</span></h1>
+    <div class="eyebrow">préparé avec amour par Teterouille</div>
+  </header>
+
+  <section class="intro" id="intro">
+    <div class="moon">☾ ✧</div>
+    <div class="eyebrow">24 jours • 24 petites surprises</div>
+    <h2>Un décembre rien qu'à nous</h2>
+    <p>Onze mois de nous, des souvenirs, des sourires et encore plein de moments à inventer. Chaque jour, une petite case t'attend.</p>
+    <button class="gold-btn" id="startBtn">Commencer ✨</button>
+    <p class="small-note">Les cases s'ouvrent selon la date réelle, du 1er au 24 décembre 2026.</p>
+  </section>
+
+  <section class="calendar-wrap hidden" id="calendar">
+    <div class="calendar-head">
+      <div class="eyebrow">Décembre 2026</div>
+      <h2>Notre calendrier étoilé</h2>
+      <p id="status">Les surprises t'attendent…</p>
+      <div class="progress" aria-label="Progression"><span id="progressBar"></span></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="small-note" style="text-align:center;margin:18px 0 0">Une case par jour. Les anciennes restent ouvertes, pour revivre les surprises 💛</p>
+    <p class="small-note" id="previewNote" style="text-align:center"></p>
+  </section>
+
+  <section class="surprise hidden" id="surprise" aria-live="polite">
+    <div class="day-label" id="dayLabel"></div>
+    <h2 id="surpriseTitle"></h2>
+    <div id="surpriseBody"></div>
+    <button class="back-btn" id="backBtn">← Retour au calendrier</button>
+  </section>
+
+  <footer>Fait avec <span>♡</span> par Teterouille pour Sachouille.<br>Une création personnelle, indépendante de tout autre site.<br>Les textes d'exemple sont à personnaliser avant de partager le lien.</footer>
+</main>
+
+<!-- Bibliothèque gratuite pour générer le QR code dans le navigateur. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/*
+  PERSONNALISATION FACILE :
+  - Modifie les titres et textes dans la liste SURPRISES.
+  - Pour une photo, place-la à côté de ce fichier et écris par exemple image: "photo1.jpg".
+  - Pour une vidéo, écris video: "video1.mp4". Pour un audio, audio: "message1.mp3".
+  - Remplace ESCALADE_DAY si tu veux placer l'invitation dans une autre case.
+  - Le 24 est volontairement une surprise à personnaliser plus tard.
+*/
+const YEAR = 2026;
+// Pour tester avant décembre : ajoute ?preview=1 à l'adresse du site.
+// Cette option ne fonctionne que si quelqu'un ajoute volontairement ce paramètre au lien.
+const PREVIEW_MODE = new URLSearchParams(location.search).get("preview") === "1";
+const ESCALADE_DAY = 24; // Invitation à l'escalade dans la case du 24 décembre.
+const ESCALADE_TEXT = "Coucouuuu Sacha,\nDéjà joyeux Noël !! Profite bien 😘\nPour fêter ça, je t’offre une séance d’escalade avec moi à l’UCPA de Bordeaux ! Faudra qu’on se cale une date plus tard… En tout cas, j’espère que ça te fera plaisir !\nGros bisous et encore joyeux Noël 🎁\nÀ bientôt, je t’aime ❤️\nTeterouille";
+const SURPRISES = [
+ {title:"Un petit mot pour commencer",text:"Coucou Sachouille 💛\nBienvenue dans ton calendrier. J'ai préparé des petites choses pour rendre ton mois de décembre un peu plus magique."},
+ {title:"Une raison parmi mille",text:"J'aime les petits détails qui font que tu es toi. À toi de compléter ici avec une raison très personnelle : [ajoute ta raison préférée]."},
+ {title:"Notre souvenir du jour",text:"Un souvenir que je garde précieusement : [raconte ici un moment que vous avez vécu ensemble]."},
+ {title:"Mini défi ✨",text:"Défi du jour : envoie-moi un emoji qui résume notre couple, puis explique ton choix !"},
+ {title:"Une petite énigme",text:"Qu'est-ce qui peut rendre une journée ordinaire beaucoup plus belle ?\nIndice : parfois, c'est une personne. (Tu peux remplacer cette énigme par la vôtre !)"},
+ {title:"Une playlist pour nous",text:"Ajoute ici le titre d'une chanson qui te fait penser à nous, et colle le lien de votre playlist si tu en as une."},
+ {title:"Une photo, un souvenir",text:"Ajoute une photo qui te rappelle un bon moment. Remplace PHOTO_A_REMPLACER.jpg dans le code par le nom du fichier.",image:"PHOTO_A_REMPLACER.jpg"},
+ {title:"Bon pour une sortie",text:"Bon pour choisir une activité à faire ensemble 💛\nÀ utiliser quand tu veux, après qu'on se soit mis d'accord sur le programme !"},
+ {title:"Le quiz de nous",text:"Question : quel est un de mes souvenirs préférés avec toi ?\nRéponse à personnaliser : [écris une réponse ou ajoute trois choix]."},
+ {title:"Quand tu as besoin de sourire",text:"Petit rappel : tu comptes pour moi. J'espère que cette surprise te donnera un mini sourire, même dans une journée compliquée."},
+ {title:"Trois choses que j'adore",text:"1. [un détail que tu aimes]\n2. [une qualité qui te touche]\n3. [un souvenir qui te fait sourire]"},
+ {title:"Le message secret",text:"Tu peux cacher ici un petit message secret, une private joke ou un mot que vous seuls comprenez."},
+ {title:"Notre date à venir 💛",text:"J’ai hâte de partager encore plein de bons moments avec toi. Une petite surprise nous attend bientôt…"},
+ {title:"Souvenir en images",text:"Ajoute une autre photo de vous deux en remplaçant PHOTO_A_REMPLACER_2.jpg par le nom du fichier.",image:"PHOTO_A_REMPLACER_2.jpg"},
+ {title:"Bon pour un moment ensemble",text:"Bon pour un moment choisi ensemble : balade, jeu, goûter ou autre idée qui vous fait plaisir."},
+ {title:"Petite question",text:"Si on pouvait revivre une journée ensemble, laquelle choisirais-tu ? J'ai hâte d'entendre ta réponse."},
+ {title:"Message vocal",text:"Tu peux ajouter ici un petit enregistrement. Remplace AUDIO_A_REMPLACER.mp3 par le nom de ton fichier.",audio:"AUDIO_A_REMPLACER.mp3"},
+ {title:"Notre private joke",text:"Écris ici une blague, une phrase ou un moment qui vous fait rire à chaque fois."},
+ {title:"Une devinette sur nous",text:"Indice : [écris un indice lié à un souvenir].\nÀ toi de deviner !"},
+ {title:"Une chose que j'ai hâte de faire",text:"J'ai hâte de vivre encore plein de nouvelles choses avec toi, même les toutes petites."},
+ {title:"Une vidéo souvenir",text:"Tu peux ajouter une vidéo ici en remplaçant VIDEO_A_REMPLACER.mp4 par le nom de ton fichier.",video:"VIDEO_A_REMPLACER.mp4"},
+ {title:"Un compliment sincère",text:"Un petit compliment rien que pour toi : [écris quelque chose de vrai et de précis que tu apprécies chez lui]."},
+ {title:"Presque Noël ✨",text:"On approche du 24 ! Merci pour les moments qu'on a déjà partagés. À compléter avec ton petit mot du jour."},
+ {title:"Notre date à l'escalade 🧗",text:ESCALADE_TEXT,link:"https://www.ucpa.com/sport-station/bordeaux/escalade",linkLabel:"Découvrir l’escalade en bloc à l’UCPA Bordeaux"}
+];
+
+const $ = id => document.getElementById(id);
+const grid = $("grid");
+const intro = $("intro"), calendar = $("calendar"), surprise = $("surprise");
+function todayDay(){
+  if(PREVIEW_MODE) return 24;
+  const now = new Date();
+  if(now.getFullYear() < YEAR || (now.getFullYear()===YEAR && now.getMonth()<11)) return 0;
+  if(now.getFullYear() > YEAR || (now.getFullYear()===YEAR && now.getMonth()>11)) return 24;
+  return Math.min(24, now.getDate());
+}
+function openCalendar(){
+  intro.classList.add("hidden"); surprise.classList.add("hidden"); calendar.classList.remove("hidden");
+  renderGrid();
+  $("previewNote").textContent = PREVIEW_MODE ? "Mode aperçu : toutes les cases sont ouvertes pour tester. Ne partage pas ce lien d'aperçu." : "";
+  calendar.scrollIntoView({behavior:"smooth",block:"start"});
+}
+$("startBtn").addEventListener("click",openCalendar);
+$("backBtn").addEventListener("click",openCalendar);
+function renderGrid(){
+  grid.innerHTML="";
+  const day=todayDay();
+  $("status").textContent = day===0 ? "Le calendrier commence le 1er décembre 💫" : day>=24 ? "Toutes les surprises sont disponibles ✨" : day+" / 24 surprises disponibles";
+  $("progressBar").style.width=(day/24*100)+"%";
+  SURPRISES.forEach((item,index)=>{
+    const n=index+1, unlocked=n<=day;
+    const b=document.createElement("button");
+    b.className="door"+(unlocked?" opened":""); b.disabled=!unlocked;
+    b.setAttribute("aria-label",unlocked?`Ouvrir la case ${n}`:`Case ${n}, pas encore disponible`);
+    b.innerHTML=`<span class="num">${unlocked?"✦": "🔒"}</span><span class="label">${String(n).padStart(2,"0")} · ${unlocked?"À découvrir":"Bientôt"}</span>`;
+    if(unlocked){b.querySelector(".num").textContent=String(n).padStart(2,"0");b.addEventListener("click",()=>showSurprise(n));}
+    grid.appendChild(b);
+  });
+}
+function showSurprise(n){
+  const item=SURPRISES[n-1];
+  if(n>todayDay())return;
+  calendar.classList.add("hidden"); intro.classList.add("hidden"); surprise.classList.remove("hidden");
+  $("dayLabel").textContent=`La surprise du ${n} décembre`;
+  $("surpriseTitle").textContent=item.title;
+  const body=$("surpriseBody");body.innerHTML="";
+  const p=document.createElement("p");p.textContent=item.text;body.appendChild(p);
+  if(item.link){const link=document.createElement("a");link.href=item.link;link.target="_blank";link.rel="noopener noreferrer";link.className="gold-btn";link.style.cssText="display:inline-block;text-decoration:none;text-align:center;margin:12px 0";link.textContent=item.linkLabel||"Ouvrir le lien";body.appendChild(link);}
+  if(item.image && !item.image.startsWith("PHOTO_A_REMPLACER")){
+    const img=document.createElement("img");img.className="photo";img.src=item.image;img.alt="Souvenir en photo";img.onerror=()=>img.remove();body.appendChild(img);
+  }
+  if(item.audio && !item.audio.startsWith("AUDIO_A_REMPLACER")){
+    const a=document.createElement("audio");a.className="media";a.controls=true;a.src=item.audio;body.appendChild(a);
+  }
+  if(item.video && !item.video.startsWith("VIDEO_A_REMPLACER")){
+    const v=document.createElement("video");v.className="media";v.controls=true;v.src=item.video;body.appendChild(v);
+  }
+  if(item.qr){
+    const intro=document.createElement("p");
+    intro.textContent="Quand tu auras choisi la page de réservation ou la page qui présente votre date, colle son lien ici pour créer le QR code.";
+    body.appendChild(intro);
+    const label=document.createElement("label");
+    label.textContent="Lien de la réservation ou de la page";
+    label.style.cssText="display:block;margin:18px 0 8px;color:#e8c879;font:14px Arial,sans-serif";
+    label.htmlFor="dateUrl";
+    body.appendChild(label);
+    const input=document.createElement("input");
+    input.id="dateUrl";input.type="url";input.placeholder="https://…";input.autocomplete="url";
+    input.style.cssText="width:100%;padding:13px;border-radius:10px;border:1px solid rgba(232,200,121,.5);background:#08152f;color:#fff9eb;font:16px Arial,sans-serif";
+    input.setAttribute("aria-label","Lien de la réservation ou de la page");
+    body.appendChild(input);
+    const make=document.createElement("button");
+    make.className="gold-btn";make.type="button";make.textContent="Créer le QR code";
+    make.style.marginTop="12px";body.appendChild(make);
+    const box=document.createElement("div");box.className="qrbox hidden";const q=document.createElement("div");q.id="qrcode";box.appendChild(q);body.appendChild(box);
+    const hint=document.createElement("p");hint.className="small-note";hint.style.textAlign="center";hint.textContent="Le QR code ouvre le lien que tu as collé. Teste-le avec un autre appareil avant d'offrir le calendrier.";body.appendChild(hint);
+    const err=document.createElement("p");err.className="small-note";err.style.color="#ffcfba";err.setAttribute("aria-live","polite");body.appendChild(err);
+    make.addEventListener("click",()=>{
+      const target=input.value.trim();
+      let parsed;
+      try { parsed=new URL(target); } catch(e) {}
+      if(!parsed || !["https:","http:"].includes(parsed.protocol)){
+        err.textContent="Colle un lien complet qui commence par https:// (ou http://).";
+        box.classList.add("hidden");return;
+      }
+      if(!window.QRCode){err.textContent="Le générateur QR n'a pas chargé. Vérifie ta connexion internet.";return;}
+      q.innerHTML="";box.classList.remove("hidden");err.textContent="";
+      new QRCode(q,{text:target,width:190,height:190,colorDark:"#08152f",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+    });
+  }
+  surprise.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function checkHash(){
+  if(location.hash==="#escalade" && todayDay()>=ESCALADE_DAY){showSurprise(ESCALADE_DAY);}
+}
+function makeSky(){
+ const sky=$("sky");
+ for(let i=0;i<65;i++){const s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.width=s.style.height=(1+Math.random()*2.4)+"px";s.style.animationDelay=(Math.random()*4)+"s";sky.appendChild(s);}
+ for(let i=0;i<18;i++){const s=document.createElement("i");s.className="snow";s.textContent="✦";s.style.left=Math.random()*100+"%";s.style.fontSize=(8+Math.random()*10)+"px";s.style.animationDuration=(9+Math.random()*14)+"s";s.style.animationDelay=(-Math.random()*18)+"s";sky.appendChild(s);}
+ setInterval(()=>{if(document.hidden)return;const h=document.createElement("i");h.className="heart";h.textContent=Math.random()>.5?"♡":"✧";h.style.left=Math.random()*100+"%";h.style.fontSize=(12+Math.random()*16)+"px";h.style.animationDuration=(7+Math.random()*7)+"s";sky.appendChild(h);setTimeout(()=>h.remove(),15000);},1300);
+}
+makeSky();
+checkHash();
+</script>
+</body>
+</html>
