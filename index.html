@@ -128,7 +128,11 @@ const SURPRISES = [
  {title:"Une playlist pour nous",text:"Mon Sachouille ❤️\n\nAujourd’hui, petite surprise musicale pour toi !!\n\nIl y a des chansons qui nous font penser à quelqu’un, qui nous rappellent des moments ou qui nous font ressentir plein de choses…\n\nAlors aujourd’hui, j’aimerais te faire écouter une petite chanson qui me fera penser à toi dès que je l’entendrai peut importe où, peut importe quand... ❤️\n\nJe te laisse découvrir celle que j’ai choisie pour nous… 🎧\n\nTa Teterouille 💋",link:"https://www.youtube.com/watch?v=qP8wOQzpoY4",linkLabel:"🎶 Écouter « Bruxelles » – Boulevard des Airs"},
  {title:"Une photo, un souvenir",text:"Mon Sachouille ❤️\n\nUn petit souvenir de nous deux, parce que je trouve qu’on est trop mignons ensemble !!\n\nJe voulais juste te rappeler que tu comptes énormément pour moi. Tu as pris une place dans mon cœur que personne d’autre ne pourrait prendre, et je suis tellement heureuse de partager tous ces petits moments avec toi.\n\nParfois, je me rends pas forcément compte de la chance que j’ai de t’avoir, mais je sais une chose : tu rends ma vie plus belle juste en étant toi. Et même une simple photo de nous me donne le sourire parce qu’elle me rappelle que j’ai quelqu’un d’incroyable à mes côtés. ❤️\n\nJ’espère qu’on aura encore des milliers de souvenirs à créer ensemble, plein de photos, de fous rires, de bisous et de moments rien qu’à nous…\n\nJe t’aime fort, mon Sachouille. ❤️\n\nTa Teterouille 💋",image:"9ef3ce04-f85f-49f1-aefa-2e7cd7fba83a.jpeg"},
  {title:"Bon pour une sortie",text:"Mon Sachouille ❤️\n\nAujourd’hui, tu as gagné un petit bon pour une sortie avec ta Teterouille !!\n\nLe principe est simple : on choisit une sortie qui nous fait plaisir à tous les deux, on se trouve une petite date et on profite de notre moment ensemble. ❤️\n\nÇa peut être une balade, un ciné, un petit goûter, une activité ou même une sortie improvisée… Le plus important pour moi, c’est de passer du temps avec toi et de créer encore plein de beaux souvenirs à deux…\n\nAlors prépare-toi, mon Sachouille, parce que ce bon est valable pour un moment rien qu’à nous !!\n\nJe t’aime fort ❤️\n\nTa Teterouille 💋"},
- {title:"Le quiz de nous",text:"Question : quel est un de mes souvenirs préférés avec toi ?\nRéponse à personnaliser : [écris une réponse ou ajoute trois choix]."},
+ {title:"Le quiz de nous",text:"Petit quiz spécial nous deux ! Choisis une réponse à chaque question. ❤️",quiz:[
+  {question:"1. Quel souvenir romantique est important dans notre histoire ?",options:["Notre premier bisou","Notre première sortie","Notre premier cadeau"],correct:0},
+  {question:"2. Quel surnom est-ce que je te donne ?",options:["Mon chaton","Sachouille","Mon cœur"],correct:1},
+  {question:"3. Qu’est-ce que j’aime le plus dans nos moments à deux ?",options:["Nos sorties","Nos photos","Tout ce qu’on partage"],correct:2}
+ ]"},
  {title:"Quand tu as besoin de sourire",text:"Petit rappel : tu comptes pour moi. J'espère que cette surprise te donnera un mini sourire, même dans une journée compliquée."},
  {title:"Trois choses que j'adore",text:"1. [un détail que tu aimes]\n2. [une qualité qui te touche]\n3. [un souvenir qui te fait sourire]"},
  {title:"Le message secret",text:"Tu peux cacher ici un petit message secret, une private joke ou un mot que vous seuls comprenez."},
@@ -186,7 +190,53 @@ function showSurprise(n){
   $("dayLabel").textContent=`La surprise du ${n} décembre`;
   $("surpriseTitle").textContent=item.title;
   const body=$("surpriseBody");body.innerHTML="";
-  const p=document.createElement("p");p.textContent=item.text;body.appendChild(p);
+  if(item.quiz){
+    const p=document.createElement("p");
+    p.textContent=item.text;
+    body.appendChild(p);
+    item.quiz.forEach(q=>{
+      const section=document.createElement("div");
+      section.style.cssText="margin:22px 0;padding:16px;border:1px solid rgba(232,200,121,.28);border-radius:14px";
+      const question=document.createElement("p");
+      question.textContent=q.question;
+      question.style.fontWeight="bold";
+      section.appendChild(question);
+      const optionsBox=document.createElement("div");
+      section.appendChild(optionsBox);
+      const feedback=document.createElement("p");
+      feedback.setAttribute("aria-live","polite");
+      section.appendChild(feedback);
+      q.options.forEach((option,index)=>{
+        const button=document.createElement("button");
+        button.type="button";
+        button.textContent=option;
+        button.style.cssText="display:block;width:100%;text-align:left;margin:8px 0;padding:12px;border-radius:10px;border:1px solid rgba(232,200,121,.45);background:#102449;color:#fff9eb;cursor:pointer";
+        button.addEventListener("click",()=>{
+          if(index===q.correct){
+            button.style.background="#d9f7df";
+            button.style.color="#14532d";
+            button.style.borderColor="#22a447";
+            feedback.textContent="Bravo, bonne réponse ! ❤️";
+            feedback.style.color="#86efac";
+            optionsBox.querySelectorAll("button").forEach(b=>b.disabled=true);
+          }else{
+            button.style.background="#ffe0e0";
+            button.style.color="#8f1d1d";
+            button.style.borderColor="#d93434";
+            button.disabled=true;
+            feedback.textContent="Oups, ce n’est pas la bonne réponse. Essaie encore ! ❤️";
+            feedback.style.color="#fca5a5";
+          }
+        });
+        optionsBox.appendChild(button);
+      });
+      body.appendChild(section);
+    });
+  }else{
+    const p=document.createElement("p");
+    p.textContent=item.text;
+    body.appendChild(p);
+  }
   if(item.link){const link=document.createElement("a");link.href=item.link;link.target="_blank";link.rel="noopener noreferrer";link.className="gold-btn";link.style.cssText="display:inline-block;text-decoration:none;text-align:center;margin:12px 0";link.textContent=item.linkLabel||"Ouvrir le lien";body.appendChild(link);}
   if(item.image && !item.image.startsWith("PHOTO_A_REMPLACER")){
     const img=document.createElement("img");img.className="photo";img.src=item.image;img.alt="Souvenir en photo";img.onerror=()=>img.remove();body.appendChild(img);
